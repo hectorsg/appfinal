@@ -79,6 +79,7 @@ export class EncuestasComponent implements OnInit {
   }
 
   async onLoginGoogle(){
+    /*
     try{
       this.auth.loginAndroidGoogle().then(i=>{
 
@@ -99,7 +100,7 @@ export class EncuestasComponent implements OnInit {
 
      
     }
-    catch(error){console.log(error)}
+    catch(error){console.log(error)}*/
   }
 
 
