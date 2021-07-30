@@ -1,0 +1,116 @@
+<div class="contenido-modal" style="    backdrop-filter: blur(6px);
+background: #000000e3; padding-top: 0;    padding: 0;  padding-bottom: 0;">
+    <!-- <div class="modal-dia">
+    <span>.</span>
+  </div>-->
+    <div *ngIf="hip.enVivo && userAny" (click)=" dismissAndSave()" class="hipodromo-mant">
+        <ion-icon name="radio"></ion-icon>
+        <span style="margin-left: 2%;">Cerrar y Mantener</span>
+    </div>
+    <div (click)="dismissModal()" class="dissmiss" style="width: max-content;
+  margin-left: auto;
+  margin-top: 2%;position:initial">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+    </div>
+
+
+    <div class="gaceta-content">
+        <div class="header">
+            <div class="hipodromo-name" style="    width: 75%;">
+                <img style="    height: 50%;
+            margin-top: 0;
+            margin-right: 4%;" src="../../assets/icon/track.png" alt="">
+                <span style="text-align: initial;">{{hip.nombre}} </span>
+            </div>
+            <div class="time-info" style="text-align: center;width: 20%;">
+                <ion-icon name="cloud"></ion-icon>
+                <span>{{hip.clima}}° </span>
+            </div>
+        </div>
+        <div class="reproductor">
+            <video style="width: 100%;height: 100%;" controls id="video-hipodromo" playsinline webkit-playsinline preload="metadata" class="video-js vjs-default-skin"></video>
+        </div>
+
+        <ion-segment style="--background:grey;" value="actividad" (ionChange)="slideMaker($event)">
+            <ion-segment-button value="actividad">
+                <ion-label>Actividad</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="historia">
+                <ion-label>Historia</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+
+        <ion-slides #hipodromo [options]="hipodromoSlide" style="width: 100%;height: 45%;">
+
+
+            <ion-slide>
+                <div class="calen-tab">
+                    <div class="tabbed">
+                        <span>Lunes</span>
+                        <span *ngIf="racesLun == 0">Sin actividad</span>
+                        <span *ngIf="racesLun > 0"> {{racesLun}} Carreras </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Martes</span>
+                        <span *ngIf="racesMar == 0">Sin actividad</span>
+                        <span *ngIf="racesMar > 0">{{racesMar}} Carreras </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Miercoles</span>
+                        <span *ngIf="racesMie == 0">Sin actividad</span>
+                        <span *ngIf="racesMie > 0">{{racesMie}} Carreras </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Jueves</span>
+                        <span *ngIf="racesJue == 0">Sin actividad</span>
+                        <span *ngIf="racesJue > 0">{{racesJue}} Carreras </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Viernes</span>
+                        <span *ngIf="racesVie == 0">Sin actividad</span>
+                        <span *ngIf="racesVie>0">{{racesVie}} Carreras </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Sabado</span>
+                        <span *ngIf="racesSab == 0">Sin actividad</span>
+                        <span *ngIf="racesSab > 0">{{racesSab}} Carreras  </span>
+                    </div>
+                    <div class="tabbed">
+                        <span>Domingo</span>
+                        <span *ngIf="racesSab == 0">Sin actividad</span>
+                        <span *ngIf="racesSab > 0 ">{{racesSab}} Carreras </span>
+                    </div>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="historia-tab">
+                    <h3 style="color: white;">Historia</h3>
+                    <div *ngIf="hip.historiauno" class="horse-info" style="transition:1s;text-align: initial;
+                color: white;">
+                        <span>{{hip.historiauno}} </span>
+                    </div>
+
+
+                    <div *ngIf="hip.historiados" class="horse-info" style="transition:1s;text-align: initial;
+                color: white;">
+                        <span>{{hip.historiados}} </span>
+                    </div>
+
+
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </ion-slide>
+
+
+        </ion-slides>
+
+
+
+
+
+    </div>
+
+
+</div>

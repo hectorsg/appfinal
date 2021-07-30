@@ -1,0 +1,39 @@
+.stocontent .proheader {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    background: #000000d6;
+    align-items: center;
+}
+
+.stocontent .proheader img {
+    height: 60%;
+}
+
+.stocontent .proheader span {
+    color: white;
+    font-size: 24px;
+}
+
+.icont {
+    width: 100%;
+}
+
+.icont span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.icont .slote {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.icont .slote span {
+    font-size: 12px;
+}

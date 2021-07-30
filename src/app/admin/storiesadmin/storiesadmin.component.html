@@ -1,0 +1,43 @@
+<div class="stocontent" style="height: 100%;width: 100%;background: white;">
+    <div class="proheader">
+        <img src="../../../assets/logo/grtv.png" alt="">
+        <span (click)="dismissModal()"> <ion-icon name="chevron-down-outline"></ion-icon> </span>
+    </div>
+
+    <ion-list style="height: 90%;overflow-y: scroll;">
+
+
+
+        <ion-item-sliding *ngFor="let item of myStories" style="margin-bottom: 2%;">
+
+            <ion-item>
+                <ion-avatar *ngIf="item.aproved === 'pendiente' " style="box-shadow: 1px 1px 13px #e3e304;" slot="start">
+                    <img style="border: 1px solid yellow;" [src]="item.talentPhoto" alt="">
+                </ion-avatar>
+                <ion-avatar *ngIf="item.aproved === 'aprobado' " style="box-shadow: 1px 1px 13px green;" slot="start">
+                    <img style="border: 1px solid rgb(5, 199, 5);" [src]="item.talentPhoto" alt="">
+                </ion-avatar>
+                <ion-avatar *ngIf="item.aproved === 'rechazado' " style="box-shadow: 1px 1px 13px rgb(170, 2, 2);" slot="start">
+                    <img style="border: 1px solid red;" [src]="item.talentPhoto" alt="">
+                </ion-avatar>
+                <div class="icont">
+                    <div class="slote">
+                        <span>{{item.type}} </span>
+                        <span>{{item.pais}} </span>
+                    </div>
+                    <span>{{item.hipodromo}} </span>
+                    <div class="slote">
+                        <span>{{item.talentName}} </span>
+                        <span>{{item.date}} </span>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="DeleteStory(item)">Eliminar</ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
+
+    </ion-list>
+</div>
