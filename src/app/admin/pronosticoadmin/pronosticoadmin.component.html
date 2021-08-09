@@ -1,0 +1,123 @@
+<div class="pronadmin" *ngIf="!preview">
+    <div class="proheader">
+        <img src="../../../assets/logo/grtv.png" alt="">
+        <span (click)="dismissModal()"> <ion-icon name="chevron-down-outline"></ion-icon> </span>
+    </div>
+    <ion-list style="height: 90%;
+    overflow-y: scroll;">
+        <ion-item>
+            <ion-select [(ngModel)]="hipodroName" placeholder="Selecciona el Hipodromo">
+                <ion-select-option *ngFor="let item of hipodromos" value="{{item.nombre}}">{{item.nombre}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-select [(ngModel)]="pais" placeholder="Selecciona el Pais">
+                <ion-select-option *ngFor="let item of paises" value="{{item.name}}">{{item.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-select [(ngModel)]="type" placeholder="Tipo de Post">
+                <ion-select-option value="Pronostico">Pronostico</ion-select-option>
+
+                <ion-select-option value="Noticia">Noticia</ion-select-option>
+
+                <ion-select-option value="Resumen">Resumen</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item style="margin-bottom: 15px;">
+            <ion-label position="floating">Descripcion del video</ion-label>
+            <ion-textarea [(ngModel)]="descripcion" rows="3" maxlength="140" placeholder="Maximo 140 caracteres"></ion-textarea>
+        </ion-item>
+
+        <span style="margin-left: 5%;">Sube tu video</span>
+        <ion-item>
+
+            <ion-card *ngIf="!url" style="    width: 100%;
+            height: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;">
+                <input style="    width: 80%;" type="file" accept=".mp4" (change)="onUpload($event)">
+            </ion-card>
+
+            <span *ngIf="uploadPercent" style="width: 100%;
+height: 20px;
+background: green;
+border-radius: 10px;
+color: white;
+font-weight: 600;">{{ uploadPercent| async}}%</span>
+            <ion-input [(ngModel)]="url" type="hidden" [value]="urlImage | async"></ion-input>
+        </ion-item>
+
+        <div class="two-buttons" *ngIf="hipodroName && pais && type && descripcion && url">
+            <ion-button (click)="previewVideo()">Preview</ion-button>
+            <ion-button (click)="sendRevision()">Enviar a Revision</ion-button>
+        </div>
+
+
+
+    </ion-list>
+</div>
+
+
+
+<div *ngIf="preview" class="contenido" style="background: black;color: white;width: 100%;height: 100%;">
+    <!--  <video style="height: 100%;width: 100%;object-fit: cover;" loop autoplay src="https://firebasestorage.googleapis.com/v0/b/grtv-2c63e.appspot.com/o/pronosticos%2FWhatsApp%20Video%202021-07-20%20at%204.24.52%20PM.mp4?alt=media&token=261b4aca-e15f-4495-b328-da2446f5aeb1"></video>
+-->
+    <video style="height: 100%;width: 100%;object-fit: cover;" id="prev" loop playsinline webkit-playsinline preload="metadata" class="video-js vjs-default-skin"></video>
+
+    <div style="height: 100%;width: 100%; display: flex;justify-content: center;align-items: center; position: absolute;z-index: 100000;top: 0;{{blur}} ">
+        <ion-icon *ngIf="blur" style="    font-size: 72px;
+      color: #ffffff6b;" name="play"></ion-icon>
+    </div>
+    <span *ngIf="currentVideoDuration " style="position: absolute;
+  bottom: 1%;
+  color: #ffffffad;
+  left: 4%;
+  font-weight: 600;
+  z-index: 1210000;
+  text-shadow: 2px 2px 4px black;
+  opacity: 0.4;">{{currentVideoDuration}} </span>
+
+    <ion-avatar style="position: absolute;z-index: 1100000;top: 2%;left: 5%;">
+        <img src="../../../assets/other/poster1.jpg" alt="">
+    </ion-avatar>
+
+    <span (click)="goBack()" style="position: absolute;z-index: 1100000;top: 2%;right: 2%;font-size: 22px;"> 
+    <ion-icon name="chevron-down-outline"></ion-icon>
+   </span>
+
+    <div class="info">
+        <div class="first">
+            <div class="linet">
+                <span *ngIf="userAny">{{userAny.displayName}} </span>
+                <span *ngIf="pais">{{pais}} </span>
+            </div>
+
+
+
+            <span>{{descripcion}} </span>
+
+            <div class="linet" style="margin-bottom: 0;margin-top: 5%;">
+                <ion-slides style="width: 100%;height: 100%;" #hipDate [options]="hipoDate">
+                    <ion-slide style="    justify-content: flex-start;
+                  font-size: 14px;margin-right: 10%;">
+                        <span *ngIf="hipodroName">{{hipodroName}} </span>
+                    </ion-slide>
+                    <ion-slide style="    justify-content: flex-start;
+                  font-size: 16px;">
+                        <span *ngIf="LongDate" style="margin-left:2px">{{LongDate}} </span>
+                    </ion-slide>
+                </ion-slides>
+
+            </div>
+
+        </div>
+        <div class="profile">
+            <ion-avatar *ngIf="userAny">
+                <img [src]="userAny.photoURL" alt="">
+            </ion-avatar>
+        </div>
+    </div>
+</div>
